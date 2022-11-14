@@ -19,9 +19,10 @@ class ApiProductController{
         return json_decode($this->data);
     }
 
-    public function getAllProducts($sort = null, $order = null, $limit = null){
+    public function getAllProducts($sort = null, $order = null, $limit = null, $offset = null, $category_name = null, $type_name = null){
+        $value = null;
         if(isset($_GET['sort'])){ 
-            if($_GET['sort']=='name' || $_GET['sort']=='description' || $_GET['sort']=='color' || $_GET['sort']=='size' || $_GET['sort']=='price' || $_GET['sort']=='stock' || $_GET['sort']=='category_fk' || $_GET['sort']=='type_fk'){
+            if($_GET['sort']=='name' || $_GET['sort']=='description' || $_GET['sort']=='color' || $_GET['sort']=='size' || $_GET['sort']=='price' || $_GET['sort']=='stock' || $_GET['sort']=='category_name' || $_GET['sort']=='type_name'){
                 $sort = $_GET['sort'];
             }
         }
@@ -35,8 +36,25 @@ class ApiProductController{
                 $limit = $_GET['limit'];
             }
         }
-        //offset
-        $products = $this->model->getAllProducts($sort, $order, $limit);
+        if(isset($_GET['offset'])){
+            if($_GET['offset']=='1' || $_GET['offset']=='2' || $_GET['offset']=='3' || $_GET['offset']=='4' || $_GET['offset']=='5' || $_GET['offset']=='10' || $_GET['offset']=='15' || $_GET['offset']=='20'){
+                $offset = $_GET['offset'];
+            }
+        }
+        if(isset($_GET['category_name'])){
+            if($_GET['category_name'] == 'Accesorios' || $_GET['category_name'] == 'Libreria' || $_GET['category_name'] == 'Bazar'){
+                $attribute = "category_name";
+                $value = $_GET['category_name'];
+            }
+        }
+        if(isset($_GET['type_name'])){
+            if($_GET['type_name'] == 'Bandanas' || $_GET['type_name'] == 'Llaveros' || $_GET['type_name'] == 'Tazas'){
+                $attribute = "type_name";
+                $value = $_GET['type_name'];
+            }
+        }
+        
+        $products = $this->model->getAllProducts($sort, $order, $limit, $offset, $attribute, $value);
         $this->view->response($products, 200);
     }
 
