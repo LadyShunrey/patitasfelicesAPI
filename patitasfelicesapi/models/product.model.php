@@ -7,12 +7,56 @@ class ProductModel{
         $this->db = new PDO('mysql:host=localhost;'.'dbname=db_patitasfelices_tienda;charset=utf8','root','');
     }
 
-    function getAllProducts(){
-        $query = $this->db->prepare('SELECT id_product, name, description, category_name, type_name, color, size, price, stock, image  FROM  product ,  category, type WHERE category_fk= id_category AND type_fk=id_type');
+    function getAllProducts($sort = null, $order = null, $limit = null){
+        $sql = 'SELECT id_product, name, description, category_name, type_name, color, size, price, stock, image  FROM  product ,  category, type WHERE category_fk= id_category AND type_fk=id_type';
+        if($sort != null){
+            $sql .= ' ORDER BY ' . $sort;
+        }
+        if($order != null){
+            $sql .= ' ' . $order;
+        }
+        if($limit != null){
+            $sql .= ' LIMIT ' . $limit;
+        }
+        echo $sql;
+        $query = $this->db->prepare($sql);
         $query->execute();
         $products = $query->fetchAll(PDO::FETCH_OBJ);
         return $products;
     }
+
+        // if($sort==null && $order == null && $limit==null){
+        //     $query = $this->db->prepare('SELECT id_product, name, description, category_name, type_name, color, size, price, stock, image  FROM  product ,  category, type WHERE category_fk= id_category AND type_fk=id_type');
+        // }
+        // if($sort == 'name'){
+        //     if($order == 'asc'){
+        //         if($limit == '5'){
+        //             $query = $this->db->prepare('SELECT id_product, name, description, category_name, type_name, color, size, price, stock, image  FROM  product ,  category, type WHERE category_fk= id_category AND type_fk=id_type ORDER BY name asc LIMIT 5');
+        //         }
+        //         if($limit == '10'){
+        //             $query = $this->db->prepare('SELECT id_product, name, description, category_name, type_name, color, size, price, stock, image  FROM  product ,  category, type WHERE category_fk= id_category AND type_fk=id_type ORDER BY name asc LIMIT 10');
+        //         }
+        //         else{
+        //             $query = $this->db->prepare('SELECT id_product, name, description, category_name, type_name, color, size, price, stock, image  FROM  product ,  category, type WHERE category_fk= id_category AND type_fk=id_type ORDER BY name asc');
+        //         }
+        //     }
+        //     else if($order == 'desc'){
+        //         if($limit == '5'){
+        //             $query = $this->db->prepare('SELECT id_product, name, description, category_name, type_name, color, size, price, stock, image  FROM  product ,  category, type WHERE category_fk= id_category AND type_fk=id_type ORDER BY name desc LIMIT 5');
+        //         }
+        //         if($limit == '10'){
+        //             $query = $this->db->prepare('SELECT id_product, name, description, category_name, type_name, color, size, price, stock, image  FROM  product ,  category, type WHERE category_fk= id_category AND type_fk=id_type ORDER BY name desc LIMIT 10');
+        //         }
+        //         else{
+        //             $query = $this->db->prepare('SELECT id_product, name, description, category_name, type_name, color, size, price, stock, image  FROM  product ,  category, type WHERE category_fk= id_category AND type_fk=id_type ORDER BY name desc');
+        //         }
+        //     }
+        // }
+        // else{
+        //     $query = $this->db->prepare('SELECT id_product, name, description, category_name, type_name, color, size, price, stock, image  FROM  product ,  category, type WHERE category_fk= id_category AND type_fk=id_type');
+        // }
+        // var_dump($query);
+        // var_dump($products);
 
     function getProduct($id){
         $query = $this->db->prepare('SELECT id_product, name, description, category_name, type_name, color, size, price, stock, image FROM product, category, type WHERE product.id_product=? AND (category_fk= id_category AND type_fk=id_type)');

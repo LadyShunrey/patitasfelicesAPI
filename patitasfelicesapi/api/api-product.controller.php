@@ -19,8 +19,24 @@ class ApiProductController{
         return json_decode($this->data);
     }
 
-    public function getAllProducts(){
-        $products = $this->model->getAllProducts();
+    public function getAllProducts($sort = null, $order = null, $limit = null){
+        if(isset($_GET['sort'])){ 
+            if($_GET['sort']=='name' || $_GET['sort']=='description' || $_GET['sort']=='color' || $_GET['sort']=='size' || $_GET['sort']=='price' || $_GET['sort']=='stock' || $_GET['sort']=='category_fk' || $_GET['sort']=='type_fk'){
+                $sort = $_GET['sort'];
+            }
+        }
+        if(isset($_GET['order'])){
+            if($_GET['order'] == 'asc' || $_GET['order'] == 'desc' || $_GET['order'] == 'ASC' || $_GET['order'] == 'DESC'){
+                $order = $_GET['order'];        
+            }
+        }
+        if(isset($_GET['limit'])){
+            if($_GET['limit']=='1' || $_GET['limit']=='2' || $_GET['limit']=='3' || $_GET['limit']=='4' || $_GET['limit']=='5' || $_GET['limit']=='10'){
+                $limit = $_GET['limit'];
+            }
+        }
+        //offset
+        $products = $this->model->getAllProducts($sort, $order, $limit);
         $this->view->response($products, 200);
     }
 
@@ -38,7 +54,6 @@ class ApiProductController{
 
     public function addProduct($params = null){
         $data = $this->getData();
-        //name, description, color, size, price, stock, category_fk, type_fk
         $name = $data->name;
         $description = $data->description;
         $color = $data->color;
