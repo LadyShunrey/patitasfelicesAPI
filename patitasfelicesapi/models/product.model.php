@@ -20,10 +20,11 @@ class ProductModel{
         }
         if($limit != null){
             $sql .= ' LIMIT ' . $limit;
+            if($offset != null){
+                $sql .= ' OFFSET ' . $offset;
+            }
         }
-        if($offset != null){
-            $sql .= ' OFFSET ' . $offset;
-        }
+        
         echo ("Usted ha hecho la siguiente consulta a la bd: \n" . $sql . "\n");
         $query = $this->db->prepare($sql);
         $query->execute();

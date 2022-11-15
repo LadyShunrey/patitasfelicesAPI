@@ -36,12 +36,12 @@ class ApiProductController{
             }
         }
         if(isset($_GET['limit'])){
-            if($_GET['limit']=='1' || $_GET['limit']=='2' || $_GET['limit']=='3' || $_GET['limit']=='4' || $_GET['limit']=='5' || $_GET['limit']=='10'){
+            if($_GET['limit'] && (is_numeric($_GET['limit']) && $_GET['limit'] >0 )){
                 $limit = $_GET['limit'];
             }
         }
         if(isset($_GET['offset'])){
-            if($_GET['offset']=='1' || $_GET['offset']=='2' || $_GET['offset']=='3' || $_GET['offset']=='4' || $_GET['offset']=='5' || $_GET['offset']=='10' || $_GET['offset']=='15' || $_GET['offset']=='20'){
+            if($_GET['offset'] && (is_numeric($_GET['offset']) && $_GET['offset'] >0 )){
                 $offset = $_GET['offset'];
             }
         }
