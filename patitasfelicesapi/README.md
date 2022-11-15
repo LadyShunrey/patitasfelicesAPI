@@ -55,11 +55,11 @@ También se pueden agregar parámetros con el nombre de una categoria o de un ti
 
 - Agregar el parámetro "category_name=" seguido de la categoria por la cual desea filtrar.
   Nombres de categorías aceptadas:
-  "Accesorios", "Libreria" o "Bazar".
+  "Accesorios", "Libreria", "Bazar" o "Indumentaria".
 
 - Agregar el parámetro "type_name=" seguido del tipo de producto por el cual desea filtrar.
   Nombres de tipos aceptados:
-  "Bandanas", "Llaveros" o "Tazas".
+  "Bandanas", "Cartucheras", "Llaveros", "Anotadores", "Calendarios", "Cuadernos", "Lapices", "Lapiceras", "Bolsos", "Tazas", "Remeras", "Billeteras" o "Buzos".
 
 - Agregar el parámetro "badge=" seguido del estado por el cual desea filtrar.
   Tipos de estados aceptados:

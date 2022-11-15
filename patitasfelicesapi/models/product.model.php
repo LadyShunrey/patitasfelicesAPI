@@ -38,15 +38,15 @@ class ProductModel{
         return $product;
     }
 
-    function addProduct($name, $description, $color, $size, $price, $stock, $category_fk, $type_fk, $badge, $on_sale, $image = null){
+    function addProduct($name, $description, $color, $size, $price, $stock, $badge, $on_sale, $category_fk, $type_fk, $image = null){
         $pathImg = null;
 
         if($image){
             $pathImg = $this->uploadImage($image);
         }
 
-        $query = $this->db->prepare('INSERT INTO product(name, description, color, size, price, stock, category_fk, type_fk, image, badge, on_sale) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-        $query->execute([$name, $description, $color, $size, $price, $stock, $category_fk, $type_fk, $pathImg, $badge, $on_sale]);
+        $query = $this->db->prepare('INSERT INTO product(name, description, color, size, price, stock, category_fk, type_fk, badge, on_sale, image) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        $query->execute([$name, $description, $color, $size, $price, $stock, $category_fk, $type_fk, $badge, $on_sale, $pathImg]);
 
         return $this->db->lastInsertId();
     }

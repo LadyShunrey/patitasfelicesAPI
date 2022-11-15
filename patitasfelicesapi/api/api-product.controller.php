@@ -26,7 +26,7 @@ class ApiProductController{
         $attribute = null;
         $value = null;
         if(isset($_GET['sort'])){ 
-            if($_GET['sort']=='name' || $_GET['sort']=='description' || $_GET['sort']=='color' || $_GET['sort']=='size' || $_GET['sort']=='price' || $_GET['sort']=='stock' || $_GET['sort']=='category_name' || $_GET['sort']=='type_name'){
+            if($_GET['sort']=='name' || $_GET['sort']=='description' || $_GET['sort']=='color' || $_GET['sort']=='size' || $_GET['sort']=='price' || $_GET['sort']=='stock' || $_GET['sort']=='category_name' || $_GET['sort']=='type_name' || $_GET['sort']=='badge' || $_GET['sort']=='on_sale'){
                 $sort = $_GET['sort'];
             }
         }
@@ -46,13 +46,13 @@ class ApiProductController{
             }
         }
         if(isset($_GET['category_name'])){
-            if($_GET['category_name'] == 'Accesorios' || $_GET['category_name'] == 'Libreria' || $_GET['category_name'] == 'Bazar'){
+            if($_GET['category_name'] == 'Accesorios' || $_GET['category_name'] == 'Libreria' || $_GET['category_name'] == 'Bazar' || $_GET['category_name'] == 'Indumentaria'){
                 $attribute = "category_name";
                 $value = $_GET['category_name'];
             }
         }
         if(isset($_GET['type_name'])){
-            if($_GET['type_name'] == 'Bandanas' || $_GET['type_name'] == 'Llaveros' || $_GET['type_name'] == 'Tazas'){
+            if($_GET['type_name'] == 'Bandanas' || $_GET['type_name'] == 'Cartucheras' || $_GET['type_name'] == 'Llaveros' || $_GET['type_name'] == 'Anotadores' || $_GET['type_name'] == 'Calendarios' || $_GET['type_name'] == 'Cuadernos' || $_GET['type_name'] == 'Lapices' || $_GET['type_name'] == 'Lapiceras' || $_GET['type_name'] == 'Bolsos' || $_GET['type_name'] == 'Tazas' || $_GET['type_name'] == 'Remeras' || $_GET['type_name'] == 'Billeteras' || $_GET['type_name'] == 'Buzos'){
                 $attribute = "type_name";
                 $value = $_GET['type_name'];
             }
@@ -116,11 +116,11 @@ class ApiProductController{
             return;
         }
 
-        if(empty($name) || empty($description) || empty($color)  || empty($size) || empty($price) || empty($stock) || empty($category_fk) || empty($type_fk) || empty($badge) || empty($on_sale)){
+        if(empty($name)||empty($description)||empty($color)||empty($size)||empty($price)||empty($stock)||empty($on_sale)||empty($category_fk)||empty($type_fk)){
             $this->view->response("Complete los datos", 400);
         }
         else{
-            $id = $this->model->addProduct($name, $description, $color, $size, $price, $stock, $category_fk, $type_fk, $badge, $on_sale);
+            $id = $this->model->addProduct($name, $description, $color, $size, $price, $stock, $badge, $on_sale, $category_fk, $type_fk);
             $product = $this->model->getProduct($id);
             if($product){
                 $this->view->response($product, 201);
