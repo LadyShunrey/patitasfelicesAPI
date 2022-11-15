@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-11-2022 a las 03:41:53
+-- Tiempo de generación: 15-11-2022 a las 04:13:31
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -89,7 +89,9 @@ INSERT INTO `product` (`id_product`, `name`, `description`, `color`, `size`, `pr
 (19, 'Buzo Voluntad', 'Buzo de voluntarios con logo', 'Negro', 'Large', 8000, 10, 4, 13, 1, 1, NULL),
 (20, 'Billetera ecológica perro', 'Billetera estampada con perritos', 'Estampada', 'Normal', 1300, 50, 1, 12, 0, 1, NULL),
 (21, 'Billetera ecológica gato', 'Billetera estampada con gatitos', 'Estampada', 'Normal', 1300, 70, 1, 12, 0, 1, NULL),
-(112, 'Billetera ecológica gato', 'Billetera estampada con gatitos', 'Estampada', 'Normal', 1300, 70, 1, 12, 0, 1, NULL);
+(22, 'Mate P4P (Proyecto 4 Patas)', 'Mate de cerámica', 'Blanco con dibujos', 'Normal', 1000, 120, 3, 14, 0, 1, NULL),
+(23, 'Mate de madera DANOS UNA PATA', 'Mate de madera', 'Pintado con dibujos', 'Normal', 1000, 120, 3, 14, 0, 1, NULL),
+(24, 'Mate voluntarios P4P', 'Mate de ceramica', 'Con dibujos', 'Normal', 1000, 120, 3, 14, 0, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -119,7 +121,8 @@ INSERT INTO `type` (`id_type`, `type_name`) VALUES
 (10, 'Tazas'),
 (11, 'Remeras'),
 (12, 'Billeteras'),
-(13, 'Buzos');
+(13, 'Buzos'),
+(14, 'Mates');
 
 -- --------------------------------------------------------
 
@@ -184,13 +187,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT de la tabla `product`
 --
 ALTER TABLE `product`
-  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 
 --
 -- AUTO_INCREMENT de la tabla `type`
 --
 ALTER TABLE `type`
-  MODIFY `id_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
