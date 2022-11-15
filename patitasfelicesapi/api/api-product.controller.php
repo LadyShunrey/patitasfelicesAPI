@@ -22,7 +22,7 @@ class ApiProductController{
         return json_decode($this->data);
     }
 
-    public function getAllProducts($sort = null, $order = null, $limit = null, $offset = null, $category_name = null, $type_name = null){
+    public function getAllProducts($sort = null, $order = null, $limit = null, $offset = null){
         $attribute = null;
         $value = null;
         if(isset($_GET['sort'])){ 
@@ -57,6 +57,18 @@ class ApiProductController{
                 $value = $_GET['type_name'];
             }
         }
+        if(isset($_GET['badge'])){
+            if($_GET['badge'] == 'true' || $_GET['badge'] == 'false'){
+                $attribute = "badge";
+                $value = $_GET['badge'];
+            }
+        }
+        if(isset($_GET['on_sale'])){
+            if($_GET['on_sale'] == 'true' || $_GET['on_sale'] == 'false'){
+                $attribute = "on_sale";
+                $value = $_GET['on_sale'];
+            }
+        }
         
         $products = $this->model->getAllProducts($sort, $order, $limit, $offset, $attribute, $value);
         $this->view->response($products, 200);
@@ -82,6 +94,8 @@ class ApiProductController{
         $size = $data->size;
         $price = $data->price;
         $stock = $data->stock;
+        $badge = $data->badge;
+        $on_sale = $data->on_sale;
         $category_fk = $data->category_fk;
         $type_fk = $data->type_fk;
 
@@ -90,11 +104,11 @@ class ApiProductController{
             return;
         }
 
-        if(empty($name) || empty($description) || empty($color)  || empty($size) || empty($price) || empty($stock) || empty($category_fk) || empty($type_fk)){
+        if(empty($name) || empty($description) || empty($color)  || empty($size) || empty($price) || empty($stock) || empty($category_fk) || empty($type_fk) || empty($badge) || empty($on_sale)){
             $this->view->response("Complete los datos", 400);
         }
         else{
-            $id = $this->model->addProduct($name, $description, $color, $size, $price, $stock, $category_fk, $type_fk);
+            $id = $this->model->addProduct($name, $description, $color, $size, $price, $stock, $category_fk, $type_fk, $badge, $on_sale);
             $product = $this->model->getProduct($id);
             if($product){
                 $this->view->response($product, 201);
@@ -137,6 +151,8 @@ class ApiProductController{
         $size = $data->size;
         $price = $data->price;
         $stock = $data->stock;
+        $badge = $data->badge;
+        $on_sale = $data->on_sale;
         $category_fk = $data->category_fk;
         $type_fk = $data->type_fk;
 
@@ -146,7 +162,7 @@ class ApiProductController{
         }
 
         if($product){
-            $this->model->editProduct($id, $name, $description, $color, $size, $price, $stock, $category_fk, $type_fk);
+            $this->model->editProduct($id, $name, $description, $color, $size, $price, $stock, $category_fk, $type_fk, $badge, $on_sale);
             $this->view->response("El producto fue modificado con exito " , 200);
         }
         else{
