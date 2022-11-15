@@ -61,12 +61,24 @@ class ApiProductController{
             if($_GET['badge'] == 'true' || $_GET['badge'] == 'false'){
                 $attribute = "badge";
                 $value = $_GET['badge'];
+                if($value == 'true'){
+                    $value = 1;
+                }
+                if($value == 'false'){
+                    $value = 0;
+                }
             }
         }
         if(isset($_GET['on_sale'])){
             if($_GET['on_sale'] == 'true' || $_GET['on_sale'] == 'false'){
                 $attribute = "on_sale";
                 $value = $_GET['on_sale'];
+                if($value == 'true'){
+                    $value = 1;
+                }
+                if($value == 'false'){
+                    $value = 0;
+                }
             }
         }
         
