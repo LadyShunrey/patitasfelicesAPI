@@ -30,7 +30,7 @@ Nuevos campos en el producto:
 - badge: *cucarda que indica cuando un producto tiene, por ejemplo, envio gratis*.
 - on_sale: *distintivo que indica si un producto está en oferta*.
 
-**PARAMETROS**:
+**SOBRE LOS PARAMETROS**:
 /patitasfelicesapi/api/products?......
 Después del signo de pregunta se pueden agregar varios parámetros para realizar distintas búsquedas u ordenamientos, se pueden agregar de a uno o de a varios, por ejemplo:
 
@@ -69,7 +69,67 @@ También se pueden agregar parámetros con el nombre de una categoria o de un ti
   Tipos de estados aceptados:
   "true" o "false".
 
-**EJEMPLOS**:
+**SOBRE EL POST Y EL PUT**
+Para poder agregar o editar un producto se usa un JSON como el siguiente:
+
+{
+    "name": "Nombre del Producto",
+    "description": "Descripción del producto",
+    "color": "Color del producto",
+    "size": "Tamaño del producto",
+    "price": "Precio con coma",
+    "stock": "Cantidad en stock",
+    "badge": "Si cuenta o no con una cucarda",
+    "on_sale": "Si está o no en oferta",
+    "category_fk": "Número de categoría",
+    "type_fk": "Número de tipo de producto"
+}
+
+- En el caso de los campos "badge" y "on_sale" las opciones son: 0 (false), o 1 (true).
+- En el caso del precio debe ser un número con coma (1200,0) porque es un double y sin el signo pesos ($).
+- En el caso del número de categoría las opciones son:
+    1 - Accesorios
+    2 - Libreria
+    3 - Bazar
+    4 - Indumentaria
+- En el caso del número de tipo de producto las opciones son:
+    1 - Bandanas
+    2 - Cartucheras
+    3 - Llaveros
+    4 - Anotadores
+    5 - Calendarios
+    6 - Cuadernos
+    7 - Lapices
+    8 - Lapiceras
+    9 - Bolsos
+    10 - Tazas
+    11 - Remeras
+    12 - Billeteras
+    13 - Buzos
+    14 - Mates
+- En el caso de los campos "stock", "category_fk" y "type_fk" los mismos deben ser completados con números enteros, a diferencia de los campos "badge" y "on_sale" que solamente pueden adoptar los valores 0 o 1, y del campo "price" que es un double.
+
+*Algunos campos se permite que puedan permanecer vacíos y otros no*
+- En el caso del **PUT** los campos obligatorios son: "name", "stock", "category_fk" y "type_fk". El resto puede permanecer vacío.
+- En el caso del **POST** los campos obligatorios son: "name", "description", "color", "size", "price", "stock", "on_sale", "category_fk" y "type_fk". El resto puede permanecer vacío.
+
+**EJEMPLO DEL JSON PARA PUT/POST**
+
+{
+    "name": "Gorra P4P",
+    "description": "Gorra tipo trucker. Tené tu gorra de Proyecto 4 Patas!",
+    "color": "Rojo, Azul, Verde",
+    "size": "Talle M",
+    "price": "1500.0",
+    "stock": "200",
+    "badge": "0",
+    "on_sale": "1",
+    "category_fk": "1",
+    "type_fk": "1"
+}
+
+
+**EJEMPLOS DE ENDPOINTS PARA LOS PRODUCTOS**:
 
 http://localhost/PatitasFelicesAPI/patitasfelicesapi/api/products   ((GET PARA TODOS LOS PRODUCTOS))
 
@@ -87,8 +147,19 @@ http://localhost/PatitasFelicesAPI/patitasfelicesapi/api/products?badge=true ((G
 
 http://localhost/PatitasFelicesAPI/patitasfelicesapi/api/products?on_sale=true ((GET FILTRANDO TODOS LOS PRODUCTOS QUE ESTEN DE OFERTA))
 
+http://localhost/PatitasFelicesAPI/patitasfelicesapi/api/products?sort=price&order=asc&on_sale=true&limit=5&offset=5 ((GET FILTRANDO TODOS LOS PRODUCTOS QUE ESTEN DE OFERTA))
+
 http://localhost/PatitasFelicesAPI/patitasfelicesapi/api/products   ((POST PARA CREAR UN NUEVO PRODUCTO))
 
-http://localhost/PatitasFelicesAPI/patitasfelicesapi/api/products/3   ((PUT PArA EDITAR UN PRODUCTO YA EXISTENTE))
+http://localhost/PatitasFelicesAPI/patitasfelicesapi/api/products/3   ((PUT PARA EDITAR UN PRODUCTO YA EXISTENTE))
 
 http://localhost/PatitasFelicesAPI/patitasfelicesapi/api/products/5   ((DELETE PARA ELIMINAR UN PRODUCTO))
+
+
+**EJEMPLOS DE ENDPOINTS PARA LOS USERS**:
+
+http://localhost/PatitasFelicesAPI/patitasfelicesapi/api/users/token   ((GET PARA PEDIR UN TOKEN))
+
+http://localhost/PatitasFelicesAPI/patitasfelicesapi/api/users/1   ((GET PARA MOSTRAR UN USER VÁLIDO))
+
+http://localhost/PatitasFelicesAPI/patitasfelicesapi/api/users/2   ((GET PARA UN USER NO VÁLIDO))

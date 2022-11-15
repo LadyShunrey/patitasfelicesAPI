@@ -9,6 +9,9 @@ class ProductModel{
 
     function getAllProducts($sort = null, $order = null, $limit = null, $offset = null, $attribute = null, $value = null){
         $sql = 'SELECT id_product, name, description, category_name, type_name, color, size, price, stock, image, badge, on_sale FROM product JOIN category ON product.category_fk = category.id_category JOIN type ON product.type_fk = type.id_type';
+        if($attribute && $value){
+            $sql .= " WHERE " .$attribute." = '$value'";
+        }
         if($sort != null){
             $sql .= ' ORDER BY ' . $sort;
             if($order != null){
@@ -21,10 +24,7 @@ class ProductModel{
         if($offset != null){
             $sql .= ' OFFSET ' . $offset;
         }
-        if($attribute && $value){
-            $sql .= " WHERE " .$attribute." = '$value'";
-        }
-        echo $sql;
+        echo ("Usted ha hecho la siguiente consulta a la bd: \n" . $sql . "\n");
         $query = $this->db->prepare($sql);
         $query->execute();
         $products = $query->fetchAll(PDO::FETCH_OBJ);

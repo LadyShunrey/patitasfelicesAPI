@@ -91,7 +91,7 @@ class ApiProductController{
         $product = $this->model->getProduct($id);
 
         if($product){
-            $this->view->response($product);
+            $this->view->response($product, 200);
         }
         else{
             $this->view->response("El producto de id = $id no existe", 404);
@@ -112,12 +112,12 @@ class ApiProductController{
         $type_fk = $data->type_fk;
 
         if(!$this->authHelper->isLoggedIn()){
-            $this->view->response("No estas logeado", 401);
+            $this->view->response("No está logeado, se requiere estar logueado para crear un producto nuevo", 401);
             return;
         }
 
         if(empty($name)||empty($description)||empty($color)||empty($size)||empty($price)||empty($stock)||empty($on_sale)||empty($category_fk)||empty($type_fk)){
-            $this->view->response("Complete los datos", 400);
+            $this->view->response("Complete los datos para poder agregar el producto", 400);
         }
         else{
             $id = $this->model->addProduct($name, $description, $color, $size, $price, $stock, $badge, $on_sale, $category_fk, $type_fk);
@@ -136,7 +136,7 @@ class ApiProductController{
         $id = $params[':ID'];
 
         if(!$this->authHelper->isLoggedIn()){
-            $this->view->response("ERROR! Debe estar loggeado para realizar esta acción! ", 401);
+            $this->view->response("ERROR! Está intentando eliminar un producto! Debe estar loggeado para realizar esta acción!", 401);
             return;
         }
 
@@ -144,10 +144,10 @@ class ApiProductController{
         
         if($product){
             $this->model->deleteProduct($id);
-            $this->view->response("Product id = $id removed successfuly", 200);
+            $this->view->response("El product con id = $id ha sido eliminado exitosamente", 200);
         }
         else{
-            $this->view->response("Product id = $id NOT FOUND", 404);
+            $this->view->response("El producto con id = $id no existe", 404);
         }
     }
 
@@ -169,13 +169,18 @@ class ApiProductController{
         $type_fk = $data->type_fk;
 
         if(!$this->authHelper->isLoggedIn()){
-            $this->view->response("No estas logeado", 401);
+            $this->view->response("No está logeado, se requiere estar logueado para modificar un producto", 401);
             return;
         }
 
         if($product){
-            $this->model->editProduct($id, $name, $description, $color, $size, $price, $stock, $category_fk, $type_fk, $badge, $on_sale);
-            $this->view->response("El producto fue modificado con exito " , 200);
+            if(empty($name)||empty($stock)||empty($category_fk)||empty($type_fk)){
+                $this->view->response("Complete los datos, los campos 'name', 'stock', 'category_fk' y 'type_fk' no pueden estar vacíos", 400);
+            }
+            else{
+                $this->model->editProduct($id, $name, $description, $color, $size, $price, $stock, $category_fk, $type_fk, $badge, $on_sale);
+                $this->view->response("El producto fue modificado con exito " , 200);
+            }
         }
         else{
             $this->view->response("El producto con el id = $id no existe" , 404);
