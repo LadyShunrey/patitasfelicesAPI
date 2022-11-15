@@ -2,17 +2,20 @@
 
 require_once 'models/product.model.php';
 require_once 'api.view.php';
+require_once 'helpers/api-auth.helper.php';
 
 class ApiProductController{
 
     private $model;
     private $view;
     private $data;
+    private $authHelper;
 
     function __construct(){
         $this->model = new ProductModel();
         $this->view = new  ApiView();
         $this->data = file_get_contents("php://input");
+        $this->authHelper = new ApiAuthHelper();
     }
 
     private function getData(){
@@ -20,6 +23,7 @@ class ApiProductController{
     }
 
     public function getAllProducts($sort = null, $order = null, $limit = null, $offset = null, $category_name = null, $type_name = null){
+        $attribute = null;
         $value = null;
         if(isset($_GET['sort'])){ 
             if($_GET['sort']=='name' || $_GET['sort']=='description' || $_GET['sort']=='color' || $_GET['sort']=='size' || $_GET['sort']=='price' || $_GET['sort']=='stock' || $_GET['sort']=='category_name' || $_GET['sort']=='type_name'){
@@ -81,6 +85,11 @@ class ApiProductController{
         $category_fk = $data->category_fk;
         $type_fk = $data->type_fk;
 
+        if(!$this->authHelper->isLoggedIn()){
+            $this->view->response("No estas logeado", 401);
+            return;
+        }
+
         if(empty($name) || empty($description) || empty($color)  || empty($size) || empty($price) || empty($stock) || empty($category_fk) || empty($type_fk)){
             $this->view->response("Complete los datos", 400);
         }
@@ -99,6 +108,12 @@ class ApiProductController{
 
     public function deleteProduct($params = null){
         $id = $params[':ID'];
+
+        if(!$this->authHelper->isLoggedIn()){
+            $this->view->response("ERROR! Debe estar loggeado para realizar esta acción! ", 401);
+            return;
+        }
+
         $product = $this->model->getProduct($id);
         
         if($product){
@@ -124,6 +139,11 @@ class ApiProductController{
         $stock = $data->stock;
         $category_fk = $data->category_fk;
         $type_fk = $data->type_fk;
+
+        if(!$this->authHelper->isLoggedIn()){
+            $this->view->response("No estas logeado", 401);
+            return;
+        }
 
         if($product){
             $this->model->editProduct($id, $name, $description, $color, $size, $price, $stock, $category_fk, $type_fk);
