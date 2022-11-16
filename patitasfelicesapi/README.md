@@ -1,16 +1,21 @@
-**API REST para el recurso de productos de** ***Patitas Felices***
+# **API REST para el recurso de productos de** ***Patitas Felices***
+
 Una API REST sencilla para manejar el CRUD de los productos
 
 Pueba con postman
 El endpoint de la API es: http://localhost/tucarpetalocal/patitasfelicesapi/api
 
-**VERBOS**:
+
+## **VERBOS**:
 - GET
 - POST
 - PUT
 - DELETE
 
-**ENDPOINTS**:
+
+## **ENDPOINTS**:
+
+```
 /patitasfelicesapi/api/products         ((GET - PARA TRAER TODOS LOS PRODUCTOS))
 /patitasfelicesapi/api/products/:ID     ((GET - PARA TRAER UN SOLO PRODUCTO SEGUN SU ID))
 /patitasfelicesapi/api/products         ((POST - PARA AÑADIR UN NUEVO PRODUCTO))
@@ -20,18 +25,25 @@ El endpoint de la API es: http://localhost/tucarpetalocal/patitasfelicesapi/api
 
 /patitasfelicesapi/api/users/token      ((GET - PARA GENERAR EL TOKEN))
 /patitasfelicesapi/api/users/:ID        ((GET - PARA MOSTRAR UN USUARIO))
+```
 
-**ACLARACIONES SOBRE EL TOKEN**:
+
+## **ACLARACIONES SOBRE EL TOKEN**:
+
 - Para realizar determinadas acciones como POST, PUT y DELETE es necesario contar con un token válido.
 - El único id de usuario válido es el 1.
 
 ***SE AGREGAN DOS NUEVAS FUNCIONALIDADES RESPECTO AL SITIO ANTERIOR!!!!***
+
 Nuevos campos en el producto:
 - badge: *cucarda que indica cuando un producto tiene, por ejemplo, envio gratis*.
 - on_sale: *distintivo que indica si un producto está en oferta*.
 
-**SOBRE LOS PARAMETROS**:
+
+## **SOBRE LOS PARAMETROS**:
+
 /patitasfelicesapi/api/products?......
+
 Después del signo de pregunta se pueden agregar varios parámetros para realizar distintas búsquedas u ordenamientos, se pueden agregar de a uno o de a varios, por ejemplo:
 
 - Agregar el parámetro 'sort=' para elegir el campo que se desea ordenar.
@@ -69,9 +81,10 @@ También se pueden agregar parámetros con el nombre de una categoria o de un ti
   Tipos de estados aceptados:
   "true" o "false".
 
-**SOBRE EL POST Y EL PUT**
-Para poder agregar o editar un producto se usa un JSON como el siguiente:
 
+## **SOBRE EL POST Y EL PUT**
+Para poder agregar o editar un producto se usa un JSON como el siguiente:
+```
 {
     "name": "Nombre del Producto",
     "description": "Descripción del producto",
@@ -84,7 +97,7 @@ Para poder agregar o editar un producto se usa un JSON como el siguiente:
     "category_fk": "Número de categoría",
     "type_fk": "Número de tipo de producto"
 }
-
+```
 - En el caso de los campos "badge" y "on_sale" las opciones son: 0 (false), o 1 (true).
 - En el caso del precio debe ser un número con coma (1200,0) porque es un double y sin el signo pesos ($).
 - En el caso del número de categoría las opciones son:
@@ -113,8 +126,9 @@ Para poder agregar o editar un producto se usa un JSON como el siguiente:
 - En el caso del **PUT** los campos obligatorios son: "name", "stock", "category_fk" y "type_fk". El resto puede permanecer vacío.
 - En el caso del **POST** los campos obligatorios son: "name", "description", "color", "size", "price", "stock", "on_sale", "category_fk" y "type_fk". El resto puede permanecer vacío.
 
-**EJEMPLO DEL JSON PARA PUT/POST**
 
+## **EJEMPLO DEL JSON PARA PUT/POST**
+```
 {
     "name": "Gorra P4P",
     "description": "Gorra tipo trucker. Tené tu gorra de Proyecto 4 Patas!",
@@ -127,9 +141,10 @@ Para poder agregar o editar un producto se usa un JSON como el siguiente:
     "category_fk": "1",
     "type_fk": "1"
 }
+```
 
 
-**EJEMPLOS DE ENDPOINTS PARA LOS PRODUCTOS**:
+## **EJEMPLOS DE ENDPOINTS PARA LOS PRODUCTOS**:
 
 http://localhost/PatitasFelicesAPI/patitasfelicesapi/api/products   ((GET PARA TODOS LOS PRODUCTOS))
 
@@ -156,7 +171,8 @@ http://localhost/PatitasFelicesAPI/patitasfelicesapi/api/products/3   ((PUT PARA
 http://localhost/PatitasFelicesAPI/patitasfelicesapi/api/products/5   ((DELETE PARA ELIMINAR UN PRODUCTO))
 
 
-**EJEMPLOS DE ENDPOINTS PARA LOS USERS**:
+
+## **EJEMPLOS DE ENDPOINTS PARA LOS USERS**:
 
 http://localhost/PatitasFelicesAPI/patitasfelicesapi/api/users/token   ((GET PARA PEDIR UN TOKEN))
 
