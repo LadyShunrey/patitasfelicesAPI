@@ -49,19 +49,16 @@ Después del signo de pregunta se pueden agregar varios parámetros para realiza
 - Agregar el parámetro 'sort=' para elegir el campo que se desea ordenar.
   Nombres de campos aceptables:
   'name', 'description', 'color', 'size', 'price', 'stock', 'category_name' o 'type_name'.
+  
   *ahora también se pueden agregar 'badge' y 'on_sale' !!!*
 
 - El parámetro 'order=' para elegir si se quiere mostrar el resultado de forma ascendente o descendente.
   Ortografía aceptada para escribir el criterio de ordenamiento:
   'ASC', 'DESC', 'asc' o 'desc'.
 
-- El parámetro 'limit=' para elegir la cantidad de respuestas a mostrar.
-  Límites aceptados:
-  '1', '2', '3', '4', '5', '10'.
+- El parámetro 'limit=' para elegir la cantidad de respuestas a mostrar. Acepta cualquier número entero mayor a cero.
 
-- El parámetro 'offset' para elegir la cantidad de resultados a dejar afuera.
-  Números de offset aceptados:
-  '1', '2', '3', '4', '5', '10', '15' o '20'.
+- El parámetro 'offset' para elegir la cantidad de resultados a dejar afuera. Acepta cualquier número entero mayor a cero.
 
 También se pueden agregar parámetros con el nombre de una categoria o de un tipo de productos para poder filtrar los resultados, por ejemplo:
 
