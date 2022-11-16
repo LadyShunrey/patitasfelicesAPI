@@ -162,7 +162,7 @@ http://localhost/PatitasFelicesAPI/patitasfelicesapi/api/products?badge=true ((G
 
 http://localhost/PatitasFelicesAPI/patitasfelicesapi/api/products?on_sale=true ((GET FILTRANDO TODOS LOS PRODUCTOS QUE ESTEN DE OFERTA))
 
-http://localhost/PatitasFelicesAPI/patitasfelicesapi/api/products?sort=price&order=asc&on_sale=true&limit=5&offset=5 ((GET FILTRANDO TODOS LOS PRODUCTOS QUE ESTEN DE OFERTA))
+http://localhost/PatitasFelicesAPI/patitasfelicesapi/api/products?sort=price&order=asc&on_sale=true&limit=5&offset=5 ((GET FILTRANDO CON TODOS LOS PARÁMETROS))
 
 http://localhost/PatitasFelicesAPI/patitasfelicesapi/api/products   ((POST PARA CREAR UN NUEVO PRODUCTO))
 
